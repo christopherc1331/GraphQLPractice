@@ -1,12 +1,27 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Recipe = sequelize.define('Recipe', {
-    title: DataTypes.STRING,
-    ingredients: DataTypes.TEXT,
-    direction: DataTypes.TEXT
-  }, {});
+  const Recipe = sequelize.define(
+    "Recipe",
+    {
+      title: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      ingredients: {
+        allowNull: false,
+        type: DataTypes.TEXT
+      },
+      direction: {
+        allowNull: false,
+        type: DataTypes.TEXT
+      }
+    },
+    {}
+  );
   Recipe.associate = function(models) {
     // associations can be defined here
+
+    Recipe.belongsTo(models.User, { foreignKey: "userId" });
   };
   return Recipe;
 };
